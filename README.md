@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CODE-VAULT
 
-## Getting Started
+CODE-VAULT is an innovative code-sharing platform designed to simplify the process of sharing code with built-in formatting features and seamless image attachments. Developed using Next.js and Supabase, CODE-VAULT enables users to easily upload code snippets, attach relevant images, and export everything as a well-formatted PDF. This tool provides a streamlined solution for sharing code along with visual context.
 
-First, run the development server:
+> **Note**: This project is still under active development and is not yet production-ready.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Roadmap](#roadmap)
+- [License](#license)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Introduction
+CODE-VAULT aims to enhance code sharing by allowing users to upload and format code snippets. It supports the addition of images related to the code, which are appended at the bottom of the exported PDF. This feature helps users provide a complete view of their projects.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
+- **Code Upload**: Paste code snippets directly into the platform.
+- **Image Upload**: Attach images that will be included at the bottom of the PDF.
+- **PDF Export**: Export your code and images as a well-formatted PDF with a single click.
+- **Code Formatter**: Integrated formatting to ensure code readability and consistency.
+- **User Authentication**: Secure user accounts managed by Supabase.
+- **Responsive Design**: Intuitive interface optimized for all devices.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tech Stack
+- **Frontend**: [Next.js](https://nextjs.org/)
+- **Backend**: [Supabase](https://supabase.com/)
+- **Styling**: CSS/SCSS, Tailwind CSS (optional)
+- **PDF Generation**: Libraries like `pdf-lib` or `jspdf` (under consideration)
+- **Code Formatting**: Prettier, Prism.js for syntax highlighting
 
-## Learn More
+## Installation
+To get started with CODE-VAULT locally:
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/code-vault.git
+   cd code-vault
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+With CODE-VAULT, you can:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Create an account**: Register or log in with an existing account.
+2. **Upload code**: Paste code into the editor, which formats it automatically.
+3. **Upload images**: Attach images to be included at the bottom of the PDF.
+4. **Download as PDF**: Generate and download a formatted PDF containing your code and images.
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+We welcome contributions! To contribute:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. **Fork the repository**.
+2. **Create a new branch** for your feature or bugfix.
+3. **Submit a pull request** with a clear description of your changes.
+
+## Roadmap
+
+Future enhancements include:
+
+- [ ] Complete PDF export functionality with code formatting and image attachment.
+- [ ] Add syntax highlighting for multiple programming languages in the code editor.
+- [ ] Implement user profile pages to manage shared code and images.
+- [ ] Improve design and add customizable themes.
+- [ ] Introduce collaborative editing features for teams.

@@ -31,7 +31,9 @@ import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-c_cpp";
 
 const CodeCanvas = () => {
-  const [codeSnippet, setCodeSnippet] = useState("//write your code here");
+  const [codeSnippet, setCodeSnippet] = useState(
+    "def foo():\n    print('hello')\n"
+  );
   const [language, setLanguage] = useState("c_cpp");
   const [theme, setTheme] = useState("dracula");
 
