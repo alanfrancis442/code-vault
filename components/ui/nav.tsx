@@ -58,7 +58,7 @@ function Nav() {
       enableSystem
       disableTransitionOnChange
     >
-      <nav className="flex items-center justify-between p-5 w-full">
+      <nav className="flex items-center justify-between p-5 w-full min-h-20">
         <div className="flex items-center space-x-4">
           <p className="font-bold capitalizese">Code vault</p>
         </div>
