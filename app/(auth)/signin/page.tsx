@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/client";
 import Link from "next/link";
 import { FaGoogle } from "react-icons/fa";
+import { fetchUser } from "@/utils/api/api";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -38,17 +39,6 @@ const Signin = () => {
       password: "",
     },
   });
-
-  const fetchUser = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (user) {
-      return user;
-    } else {
-      return null;
-    }
-  };
 
   const handelLogin = async (e: any) => {
     e.preventDefault();
@@ -70,7 +60,7 @@ const Signin = () => {
   useEffect(() => {
     fetchUser().then((user) => {
       if (user) {
-        router.replace("/users");
+        router.replace("/");
       } else {
         console.log("No user found");
       }
