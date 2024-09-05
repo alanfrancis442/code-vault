@@ -6,6 +6,7 @@ import { Button } from "./button";
 import { IoMdMore } from "react-icons/io";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 import {
   DropdownMenu,
@@ -22,7 +23,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { supabase } from "@/utils/client";
+
 export default function Sidebar() {
+  const router = useRouter();
   // Dummy options
   const options = [
     { title: "Option 1", description: "Description 1" },
@@ -47,6 +51,14 @@ export default function Sidebar() {
   if (!isClient) {
     return null; // Render nothing on the server
   }
+
+  const handelLogout = async () => {
+    let { error } = await supabase.auth.signOut();
+    if (error) console.log("Error logging out:", error.message);
+    else {
+      router.replace("/signin");
+    }
+  };
 
   return (
     <div className="max-h-screen">
@@ -101,7 +113,10 @@ export default function Sidebar() {
                 <IoMdMore className="text-xl" />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem className="flex justify-between text-red-500">
+                <DropdownMenuItem
+                  onClick={handelLogout}
+                  className="flex justify-between text-red-500"
+                >
                   Logout
                   <MdLogout />
                 </DropdownMenuItem>

@@ -63,7 +63,7 @@ const Signin = () => {
       // Display error message
       form.setError("email", { type: "manual", message: error.message });
     } else {
-      router.replace("/users");
+      router.replace("/");
     }
   };
 

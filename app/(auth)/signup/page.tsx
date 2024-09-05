@@ -20,25 +20,23 @@ import { supabase } from "@/utils/client";
 import Link from "next/link";
 import { FaGoogle } from "react-icons/fa";
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters long",
-  }),
-  email: z.string().email({
-    message: "Enter a valid email",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters long",
-  }),
-  confirmPassword: z
-    .string()
-    .min(6, {
-      message: "Confirm Password must be at least 6 characters long",
-    })
-    .refine((val, ctx) => val === ctx.parent.password, {
-      message: "Passwords do not match",
+const formSchema = z
+  .object({
+    username: z.string().min(2, {
+      message: "Username must be at least 2 characters long",
     }),
-});
+    email: z.string().email({
+      message: "Enter a valid email",
+    }),
+    password: z.string().min(6, {
+      message: "Password must be at least 6 characters long",
+    }),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 const Signup = () => {
   const router = useRouter();
@@ -64,7 +62,7 @@ const Signup = () => {
   };
 
   const handleSignup = async (e: any) => {
-    e.preventDefault();
+    console.log("Signup form submitted");
     const { username, email, password } = form.getValues();
     console.log(username, email, password);
     let { data, error } = await supabase.auth.signUp({
@@ -75,16 +73,16 @@ const Signup = () => {
       console.log("Signup failed:", error.message);
       // toast.error(error.message);
     } else {
-      // const { error } = await supabase
-      //   .from("users")
-      //   .insert([{ user_id: data.user?.id, name: username, email: email }])
-      //   .select();
-      // if (error) {
-      //   console.log("Error inserting user:", error.message);
-      // } else {
-      //   router.replace("/");
-      // }
-      console.log("Signup success:");
+      const { error } = await supabase
+        .from("users")
+        .insert([{ id: data.user?.id, name: username, email: email }])
+        .select();
+      if (error) {
+        console.log("Error inserting user:", error.message);
+      } else {
+        console.log("Signup success:");
+        router.replace("/");
+      }
     }
   };
 
@@ -118,7 +116,7 @@ const Signup = () => {
             <div className="flex justify-center items-center h-full md:w-1/2 w-full">
               <Form {...form}>
                 <form
-                  onSubmit={handleSignup}
+                  onSubmit={form.handleSubmit(handleSignup)}
                   className="space-y-4 border p-8 rounded-sm w-1/2"
                 >
                   <div className="text-2xl font-bold underline">Signup</div>
