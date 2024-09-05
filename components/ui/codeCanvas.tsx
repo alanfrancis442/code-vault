@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Menubar,
   MenubarContent,
@@ -29,11 +29,10 @@ import "ace-builds/src-noconflict/mode-typescript";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-c_cpp";
+import { format_code } from "@/utils/api/api";
 
 const CodeCanvas = () => {
-  const [codeSnippet, setCodeSnippet] = useState(
-    "def foo():\n    print('hello')\n"
-  );
+  const [codeSnippet, setCodeSnippet] = useState("//write some code\n");
   const [language, setLanguage] = useState("c_cpp");
   const [theme, setTheme] = useState("dracula");
 
@@ -60,7 +59,14 @@ const CodeCanvas = () => {
   };
 
   const handelCodeFormat = async () => {
-    setCodeSnippet(await formatCode(codeSnippet, language));
+    try {
+      const response = await format_code(codeSnippet, language);
+      console.log("server response", response);
+      setCodeSnippet(response.formatted_code);
+      // setCodeSnippet("hellow");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -124,7 +130,7 @@ const CodeCanvas = () => {
         theme={theme}
         name="code-editor"
         onChange={handelonChange}
-        onPaste={handelCodeFormat}
+        // onPaste={handelCodeFormat}
         fontSize={14}
         lineHeight={19}
         showPrintMargin={true}

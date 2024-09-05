@@ -18,6 +18,7 @@ import { ThemeProvider } from "@/app/context/themeProvider";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/client";
 import Link from "next/link";
+import { FaGoogle } from "react-icons/fa";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -131,7 +132,9 @@ const Signin = () => {
                     )}
                   />
                   <div className="flex flex-col gap-3">
-                    <Button>Signin with Google</Button>
+                    <Button>
+                      Signin with Google <FaGoogle className="ml-1" />
+                    </Button>
                     <Button type="submit">Sign in</Button>
                     <Link
                       href="/signup"

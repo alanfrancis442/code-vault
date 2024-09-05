@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "@/components/ui/sidebar";
 import CodeCanvas from "@/components/ui/codeCanvas";
 import Image from "next/image";

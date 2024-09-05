@@ -18,6 +18,7 @@ import { ThemeProvider } from "@/app/context/themeProvider";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/client";
 import Link from "next/link";
+import { FaGoogle } from "react-icons/fa";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -74,15 +75,23 @@ const Signup = () => {
       console.log("Signup failed:", error.message);
       // toast.error(error.message);
     } else {
-      // console.log("User signed up successfully:", data);
-      router.replace("/users");
+      // const { error } = await supabase
+      //   .from("users")
+      //   .insert([{ user_id: data.user?.id, name: username, email: email }])
+      //   .select();
+      // if (error) {
+      //   console.log("Error inserting user:", error.message);
+      // } else {
+      //   router.replace("/");
+      // }
+      console.log("Signup success:");
     }
   };
 
   useEffect(() => {
     fetchUser().then((user) => {
       if (user) {
-        router.replace("/users");
+        router.replace("/");
       } else {
         console.log("No user found");
       }
@@ -174,7 +183,9 @@ const Signup = () => {
                     )}
                   />
                   <div className="flex flex-col gap-3">
-                    <Button>Signup with Google</Button>
+                    <Button>
+                      Signin with Google <FaGoogle className="ml-1" />
+                    </Button>
                     <Button type="submit">Signup</Button>
                   </div>
                 </form>

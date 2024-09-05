@@ -1,16 +1,16 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "./button";
 import { IoMdMore } from "react-icons/io";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -23,61 +23,39 @@ import {
 } from "@/components/ui/dialog";
 
 export default function Sidebar() {
-  //dummy options
+  // Dummy options
   const options = [
-    {
-      title: "Option 1",
-      description: "Description 1",
-    },
-    {
-      title: "Option 2",
-      description: "Description 2",
-    },
-    {
-      title: "Option 3",
-      description: "Description 3",
-    },
-    {
-      title: "Option 4",
-      description: "Description 4",
-    },
-    {
-      title: "Option 5",
-      description: "Description 5",
-    },
-    {
-      title: "Option 6",
-      description: "Description 6",
-    },
-    {
-      title: "Option 7",
-      description: "Description 7",
-    },
-    {
-      title: "Option 8",
-      description: "Description 8",
-    },
-    {
-      title: "Option 9",
-      description: "Description 9",
-    },
-    {
-      title: "Option 10",
-      description: "Description 10",
-    },
+    { title: "Option 1", description: "Description 1" },
+    { title: "Option 2", description: "Description 2" },
+    { title: "Option 3", description: "Description 3" },
+    { title: "Option 4", description: "Description 4" },
+    { title: "Option 5", description: "Description 5" },
+    { title: "Option 6", description: "Description 6" },
+    { title: "Option 7", description: "Description 7" },
+    { title: "Option 8", description: "Description 8" },
+    { title: "Option 9", description: "Description 9" },
+    { title: "Option 10", description: "Description 10" },
   ];
+
+  // State to manage client-side rendering
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null; // Render nothing on the server
+  }
+
   return (
     <div className="max-h-screen">
-      <ScrollArea className=" h-4/5 w-[350px] rounded-md border p-4">
+      <ScrollArea className="h-4/5 w-[350px] rounded-md border p-4">
         <div className="flex flex-col gap-2">
           {options.map((option, index) => (
             <Dialog key={index}>
               <DialogTrigger asChild>
-                <Button
-                  key={index}
-                  variant={"default"}
-                  className="p-8 text-left"
-                >
+                <Button variant={"default"} className="p-8 text-left">
                   <span className="font-bold w-full">{option.title}</span>
                   <DropdownMenu>
                     <DropdownMenuTrigger>
@@ -108,12 +86,29 @@ export default function Sidebar() {
           ))}
         </div>
       </ScrollArea>
-      <div className="p-4 flex gap-5 items-center border-r">
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        <span>user name</span>
+      <div className="p-4 flex gap-5 items-center justify-between border-r">
+        <div className="flex items-center gap-3">
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <span>user name</span>
+        </div>
+        <Dialog>
+          <DialogTrigger asChild>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <IoMdMore className="text-xl" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem className="flex justify-between text-red-500">
+                  Logout
+                  <MdLogout />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </DialogTrigger>
+        </Dialog>
       </div>
     </div>
   );
