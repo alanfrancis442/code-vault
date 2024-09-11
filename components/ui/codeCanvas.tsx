@@ -29,7 +29,7 @@ import "ace-builds/src-noconflict/mode-typescript";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-c_cpp";
-import { format_code } from "@/utils/api/api";
+import { fetchUser, format_code } from "@/utils/api/api";
 
 const CodeCanvas = () => {
   const [codeSnippet, setCodeSnippet] = useState("//write some code\n");
@@ -68,6 +68,16 @@ const CodeCanvas = () => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    fetchUser().then((user) => {
+      if (!user) {
+        console.log("user not found");
+      } else {
+        console.log("user data", user);
+      }
+    });
+  }, []);
 
   return (
     <div className="flex flex-col h-full">

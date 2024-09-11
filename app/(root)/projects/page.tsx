@@ -21,7 +21,7 @@ import { fetchUser } from "@/utils/api/api";
 import { fetchProjects } from "@/utils/api/api";
 import { useRouter } from "next/navigation";
 import { FaChevronRight } from "react-icons/fa";
-
+import useUserStore from "@/app/hooks/userStore";
 const PlaceholderSkeleton = () => {
   return (
     <div className="flex flex-col space-y-2">
@@ -117,6 +117,14 @@ const Projects = () => {
       console.log("error", error);
     } else {
       console.log("data", data);
+      const project_id = data[0].id;
+
+      await supabase
+        .from("users")
+        .update({ project_id: [] })
+        .eq("some_column", "someValue")
+        .select();
+
       getAllProjects();
     }
   };
